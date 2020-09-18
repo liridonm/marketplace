@@ -4,7 +4,6 @@ import com.patela.marketplace.model.common.ProductState;
 import com.patela.marketplace.model.common.ProductType;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -36,9 +35,28 @@ public class Product extends Model<Integer> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    /**
-     * Product Attribute Values
-     */
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "uom_id")
+    private Uom uom;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tax_id")
+    private Tax tax;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "currency_id")
+    private Currency currency;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
     @ManyToMany
     @JoinTable(
             name = "product_product_attribute_value_rel",
