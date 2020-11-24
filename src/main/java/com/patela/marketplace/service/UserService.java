@@ -1,7 +1,8 @@
 package com.patela.marketplace.service;
 
-import com.patela.marketplace.model.User;
+import com.patela.marketplace.model.domain.User;
 import com.patela.marketplace.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,8 +12,11 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User readByEmail(String email) {
@@ -23,12 +27,14 @@ public class UserService {
         return this.userRepository.findByUsername(username).orElse(null);
     }
 
-    public User createOrUpdate(User user) {
+    public User createAccount(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.userRepository.save(user);
     }
 
     public List<User> readAll() {
         return this.userRepository.findAll();
     }
+
 
 }

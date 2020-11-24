@@ -1,4 +1,4 @@
-package com.patela.marketplace.model;
+package com.patela.marketplace.model.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,9 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "product_specification")
+@Table(name = "tax")
 @Getter
 @Setter
-public class Specification extends Model<Integer> {
+public class Tax extends Model<Integer> {
+
     private String name;
+
+    private String value;
 }

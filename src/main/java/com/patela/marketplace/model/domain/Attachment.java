@@ -1,10 +1,9 @@
-package com.patela.marketplace.model;
+package com.patela.marketplace.model.domain;
 
 import com.patela.marketplace.model.annotation.AttachmentType;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.jws.WebParam;
 import javax.persistence.*;
 
 @Entity

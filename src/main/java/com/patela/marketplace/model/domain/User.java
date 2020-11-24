@@ -1,27 +1,32 @@
-package com.patela.marketplace.model;
+package com.patela.marketplace.model.domain;
 
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "account_user")
+@Table(name = "account_user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"})
+})
 @Getter
 @Setter
 //@Where(clause = "deleted = false")
 public class User extends Model<Integer> {
 
     @NotNull
+    @Column(unique = true)
     private String username;
 
-    @NotNull
+    @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
 
@@ -32,4 +37,5 @@ public class User extends Model<Integer> {
     private boolean isVerified = false;
 
     private boolean active = false;
+
 }

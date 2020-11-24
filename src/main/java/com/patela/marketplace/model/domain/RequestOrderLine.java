@@ -1,4 +1,4 @@
-package com.patela.marketplace.model;
+package com.patela.marketplace.model.domain;
 
 import lombok.Getter;
 import lombok.Setter;
