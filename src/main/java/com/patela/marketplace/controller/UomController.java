@@ -50,8 +50,8 @@ public class UomController {
     @DefaultExceptionMessage(defaultMessage = "Failed to update uom!")
     @Operation(summary = "Update uom")
     public ResponseEntity<ResponseWrapper> update(@RequestBody UomDTO uom) throws ServiceException {
-        UomDTO createdUom = uomService.update(uom);
-        return ResponseEntity.ok(new ResponseWrapper("Uom has been updated!", createdUom));
+        UomDTO updateUom = uomService.update(uom);
+        return ResponseEntity.ok(new ResponseWrapper("Uom has been updated!", updateUom));
     }
 
     @DeleteMapping("/api/v1/uom/{id}")
