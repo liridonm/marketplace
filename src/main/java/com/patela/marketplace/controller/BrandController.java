@@ -31,7 +31,7 @@ public class BrandController {
     @DefaultExceptionMessage(defaultMessage = "Failed to read brand by id")
     @Operation(summary = "Read a brand by ID")
     public ResponseEntity<ResponseWrapper> readById(@PathVariable("id") Integer id) throws ServiceException{
-        BrandDTO brand = brandService.readBy(id);
+        BrandDTO brand = brandService.readById(id);
         return  ResponseEntity.ok(new ResponseWrapper("Successfully retrieved the Brand with ID: " + id, brand));
     }
 
