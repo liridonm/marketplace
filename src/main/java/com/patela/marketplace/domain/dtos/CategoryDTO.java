@@ -9,6 +9,7 @@ import lombok.Setter;
 public class CategoryDTO
 {
     private Integer id;
+    private String name;
     private String description;
     private CategoryType type;
     private Boolean isDeleted;
