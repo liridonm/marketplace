@@ -40,6 +40,7 @@ public class BrandServiceImpl implements BrandService {
         Brand convertBrand = mapperUtil.convertToDTO(brand, new Brand());
         validateBrand(convertBrand);
         Brand createdBrand = brandRepository.save(convertBrand);
+
         return mapperUtil.convertToDTO(createdBrand, new BrandDTO());
     }
 
