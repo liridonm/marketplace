@@ -9,5 +9,5 @@ public class CategoryTypeDTO {
     private Integer id;
     private String name;
     private String description;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

@@ -10,5 +10,5 @@ public class TaxDTO {
     private Integer id;
     private String name;
     private String value;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

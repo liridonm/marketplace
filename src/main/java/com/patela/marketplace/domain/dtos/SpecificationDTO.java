@@ -8,5 +8,5 @@ import lombok.Setter;
 public class SpecificationDTO {
     private Integer id;
     private String name;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

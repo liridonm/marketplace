@@ -9,5 +9,5 @@ public class BrandDTO {
     private Integer id;
     private String name;
     private String barcode;
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

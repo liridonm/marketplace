@@ -15,5 +15,5 @@ public class CurrencyDTO {
 
     private String symbol;
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

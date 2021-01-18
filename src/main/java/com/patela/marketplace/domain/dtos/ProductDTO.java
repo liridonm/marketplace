@@ -43,7 +43,7 @@ public class ProductDTO {
 
     private List<AttributeValue> attributeValues;
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 
     private InventoryDTO inventory;
 

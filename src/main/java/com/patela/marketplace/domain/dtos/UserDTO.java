@@ -2,9 +2,10 @@ package com.patela.marketplace.domain.dtos;
 
 import com.patela.marketplace.domain.enums.UserRole;
 import com.patela.marketplace.domain.enums.UserState;
+import lombok.Data;
 import lombok.Getter;
 
-@Getter
+@Data
 public class UserDTO {
 
     private Integer id;
@@ -22,5 +23,5 @@ public class UserDTO {
 
     private UserState state;
 
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

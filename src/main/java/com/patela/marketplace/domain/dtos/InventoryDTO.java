@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 @Data
 public class InventoryDTO {
 
+    private Integer id;
+
     private BigDecimal minQuantity;
 
     private BigDecimal maxQuantity;
@@ -22,4 +24,6 @@ public class InventoryDTO {
     private StockStatus status;
 
     private ProductDTO product;
+
+    private Boolean isDeleted = false;
 }
