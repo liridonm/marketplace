@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+//TODO: should we leave to create two category with the same that are linked with the same categoryType?
 public class Category extends BaseEntity<Integer> {
 
     private String name;

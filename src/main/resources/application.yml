@@ -19,7 +19,6 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-
   flyway:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}

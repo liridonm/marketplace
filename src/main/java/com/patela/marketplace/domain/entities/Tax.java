@@ -17,8 +17,8 @@ import javax.validation.constraints.Positive;
 @Where(clause = "is_deleted=false")
 public class Tax extends BaseEntity<Integer> {
 
-    @Positive
     private String name;
 
+    @Positive
     private String value;
 }

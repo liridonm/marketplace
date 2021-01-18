@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+//TODO: should name be unique?
 public class CategoryType extends BaseEntity<Integer> {
 
     private String name;

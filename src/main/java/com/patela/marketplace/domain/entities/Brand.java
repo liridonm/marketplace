@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+//TODO: constraints cannot create two brand with the same name and barcode. Neither barcode is unique
 public class Brand extends BaseEntity<Integer> {
 
     private String name;

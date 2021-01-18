@@ -22,7 +22,6 @@ public abstract class BaseEntity<T> {
     /**
      * Model create date.
      */
-
     @JsonIgnore
     @Column(name = "create_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
