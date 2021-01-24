@@ -19,11 +19,8 @@ public class CurrencyController {
 
     private final CurrencyService currencyService;
 
-    private final MapperUtil mapperUtil;
-
-    public CurrencyController(CurrencyService currencyService, MapperUtil mapperUtil) {
+    public CurrencyController(CurrencyService currencyService) {
         this.currencyService = currencyService;
-        this.mapperUtil = mapperUtil;
     }
 
     @GetMapping(value = {"/api/v1/currency", "/api/p1/currency"})

@@ -6,12 +6,14 @@ import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.repository.SpecificationRepository;
 import com.patela.marketplace.service.SpecificationService;
 import com.patela.marketplace.util.MapperUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class SpecificationServiceImpl implements SpecificationService {
     private final SpecificationRepository specificationRepository;
     private final MapperUtil mapperUtil;

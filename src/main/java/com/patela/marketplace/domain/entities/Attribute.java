@@ -8,7 +8,10 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product_attribute")
+@Table(name = "product_attribute",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"name", "code"})
+        })
 @Getter
 @Setter
 @NoArgsConstructor

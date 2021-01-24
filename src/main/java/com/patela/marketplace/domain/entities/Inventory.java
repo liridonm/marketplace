@@ -35,6 +35,5 @@ public class Inventory extends BaseEntity<Integer> {
     private StockStatus status;
 
     @OneToOne(mappedBy = "inventory")
-    @JsonIgnore
     private Product product;
 }

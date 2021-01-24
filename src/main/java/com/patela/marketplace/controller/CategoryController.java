@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @Tag(name = "Category Controller", description = "Category API")
 public class CategoryController {
+
     private final CategoryService categoryService;
 
     public CategoryController(CategoryService categoryService){
@@ -31,7 +32,7 @@ public class CategoryController {
     }
 
     @GetMapping(value = "/api/v1/category{id}")
-    @DefaultExceptionMessage(defaultMessage = "Failed to read Category by ID")
+    @DefaultExceptionMessage(defaultMessage = "Failed to read Category by id")
     @Operation(summary = "Read a category by ID")
     public ResponseEntity<ResponseWrapper> readById(@PathVariable("id") Integer id) throws ServiceException{
         CategoryDTO category = categoryService.readBy(id);

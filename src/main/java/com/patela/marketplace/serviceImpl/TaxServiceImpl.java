@@ -6,11 +6,13 @@ import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.repository.TaxRepository;
 import com.patela.marketplace.service.TaxService;
 import com.patela.marketplace.util.MapperUtil;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class TaxServiceImpl implements TaxService {
     private final TaxRepository taxRepository;
     private final MapperUtil mapperUtil;

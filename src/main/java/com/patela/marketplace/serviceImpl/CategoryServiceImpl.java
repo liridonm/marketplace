@@ -6,11 +6,13 @@ import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.repository.CategoryRepository;
 import com.patela.marketplace.service.CategoryService;
 import com.patela.marketplace.util.MapperUtil;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final MapperUtil mapperUtil;

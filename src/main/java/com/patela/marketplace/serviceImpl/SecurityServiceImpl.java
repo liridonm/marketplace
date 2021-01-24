@@ -6,7 +6,6 @@ import com.patela.marketplace.service.UserService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SecurityServiceImpl implements SecurityService, UserDetailsService {
+public class SecurityServiceImpl implements SecurityService {
 
     private final UserService userService;
 
@@ -28,7 +27,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
         User foundedUser = loadUser(s);
 
         if (foundedUser == null) {
-            throw new UsernameNotFoundException("user not found! " + s);
+            throw new UsernameNotFoundException("User not found! " + s);
         }
 
         return new org.springframework.security.core.userdetails.User(foundedUser.getUsername(), foundedUser.getPassword(), listAuthorities(foundedUser));
