@@ -10,6 +10,7 @@ import com.patela.marketplace.domain.enums.ProductState;
 import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.repository.ProductRepository;
 import com.patela.marketplace.service.ProductService;
+import com.patela.marketplace.util.IgnoreNullsUtil;
 import com.patela.marketplace.util.MapperUtil;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,12 @@ public class ProductServiceImpl implements ProductService {
 
     private final MapperUtil mapperUtil;
 
-    public ProductServiceImpl(ProductRepository productRepository, MapperUtil mapperUtil) {
+    private final IgnoreNullsUtil ignoreNullsUtil;
+
+    public ProductServiceImpl(ProductRepository productRepository, MapperUtil mapperUtil, IgnoreNullsUtil ignoreNullsUtil) {
         this.productRepository = productRepository;
         this.mapperUtil = mapperUtil;
+        this.ignoreNullsUtil = ignoreNullsUtil;
     }
 
     @Override
@@ -50,7 +54,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO create(ProductDTO productDTO) throws ServiceException {
         Product product = mapperUtil.convert(productDTO, new Product());
 
-        Product createdProduct = validateAndSaveProduct(product);
+        validateProduct(product);
+
+        Product createdProduct = productRepository.save(product);;
 
         return mapperUtil.convert(createdProduct, new ProductDTO());
     }
@@ -59,9 +65,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO update(ProductDTO productDTO) throws ServiceException {
         Product product = mapperUtil.convert(productDTO, new Product());
 
-        readById(product.getId());
+        Product foundProduct = productRepository.findById(productDTO.getId())
+                .orElseThrow(() -> new ServiceException("Product does not exists!"));
 
-        Product updatedProduct = validateAndSaveProduct(product);
+        validateProduct(foundProduct);
+        ignoreNullsUtil.myCopyProperties(product, foundProduct);
+        Product updatedProduct = productRepository.save(foundProduct);
 
         return mapperUtil.convert(updatedProduct, new ProductDTO());
     }
@@ -104,12 +113,10 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
-    private Product validateAndSaveProduct(Product product) throws ServiceException {
+    private void validateProduct(Product product) throws ServiceException {
         if (product.getName() == null || product.getPrice() == null || product.getPrice().equals(BigDecimal.ZERO)
                 || product.getType() == null || product.getState() == null) {
             throw new ServiceException("Name, Price, Type and State can't be null");
         }
-
-        return productRepository.save(product);
     }
 }

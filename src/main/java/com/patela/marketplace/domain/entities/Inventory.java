@@ -1,7 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.patela.marketplace.domain.enums.StockStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Inventory extends BaseEntity<Integer> {
 
     @Column(name = "min_quantity")

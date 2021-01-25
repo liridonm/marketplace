@@ -1,6 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.patela.marketplace.domain.enums.ProductState;
 import com.patela.marketplace.domain.enums.ProductType;
 import lombok.Getter;
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product extends BaseEntity<Integer> {
 
     public String name;

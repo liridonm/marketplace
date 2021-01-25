@@ -2,7 +2,7 @@ CREATE OR REPLACE FUNCTION update_attribute_name_and_code_on_delete() RETURNS TR
 $$
 BEGIN
     IF OLD.is_deleted = FALSE AND NEW.is_deleted = TRUE THEN
-        UPDATE currency
+        UPDATE product_attribute
         SET name    = concat(name, ' - ', now()),
             code    = concat(code, ' - ', now())
         WHERE id = NEW.id;

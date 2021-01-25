@@ -1,5 +1,6 @@
 package com.patela.marketplace.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,11 +15,13 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "currency",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = {"name", "symbol"})
-        })
+        }
+        )
 @Getter
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Currency extends BaseEntity<Integer> {
 
     @Column(nullable = false)

@@ -27,7 +27,7 @@ public class InventoryServiceImpl implements InventoryService {
     public InventoryDTO addInventoryOnStock(InventoryDTO inventoryDTO) throws ServiceException{
         Product convertProduct = mapperUtil.convert(inventoryDTO.getProduct(), new Product());
 
-        Inventory inventory = inventoryRepository.findByProduct(convertProduct)
+        Inventory inventory = inventoryRepository.findByProductId(convertProduct.getId())
                 .orElseThrow(() -> new ServiceException("Inventory does not exists!"));
 
         BigDecimal qty = inventory.getQuantity().add(inventoryDTO.getQuantity());
@@ -37,4 +37,5 @@ public class InventoryServiceImpl implements InventoryService {
 
         return mapperUtil.convert(updatedInventory, new InventoryDTO());
     }
+
 }

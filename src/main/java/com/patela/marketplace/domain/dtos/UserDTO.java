@@ -1,5 +1,7 @@
 package com.patela.marketplace.domain.dtos;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.patela.marketplace.domain.enums.UserRole;
 import com.patela.marketplace.domain.enums.UserState;
 import lombok.Data;
@@ -14,7 +16,7 @@ public class UserDTO {
 
     private String username;
 
-    //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     private UserRole role;

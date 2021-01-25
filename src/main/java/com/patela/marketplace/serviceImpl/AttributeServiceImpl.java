@@ -42,11 +42,8 @@ public class AttributeServiceImpl implements AttributeService {
     public AttributeDTO create(AttributeDTO attributeDTO) throws ServiceException {
 
         Attribute convertedAttribute = mapperUtil.convert(attributeDTO, new Attribute());
-
         validateAttribute(attributeDTO);
-
         Attribute createdAttribute = attributeRepository.save(convertedAttribute);
-
         attributeDTO.setId(createdAttribute.getId());
 
         return attributeDTO;

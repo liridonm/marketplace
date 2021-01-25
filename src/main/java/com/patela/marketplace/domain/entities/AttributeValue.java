@@ -1,8 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.patela.marketplace.annotations.IgnoreMapping;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.patela.marketplace.domain.enums.AttributeValueType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +9,17 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "product_attribute_value")
+@Table(name = "product_attribute_value",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"value", "attribute_id"})
+        })
 @Getter
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AttributeValue extends BaseEntity<Integer> {
 
     private String label;
@@ -31,7 +33,4 @@ public class AttributeValue extends BaseEntity<Integer> {
     @Enumerated(EnumType.STRING)
     private AttributeValueType attributeValueType;
 
-    @ManyToMany(mappedBy = "attributeValues")
-    @IgnoreMapping
-    private List<Product> products;
 }

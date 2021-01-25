@@ -16,8 +16,8 @@ public abstract class BaseEntity<T> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private T id;
 
-    @Column(name = "is_deleted", columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private Boolean isDeleted = Boolean.FALSE;
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
 
     /**
      * Model create date.

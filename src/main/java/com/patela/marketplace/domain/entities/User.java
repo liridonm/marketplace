@@ -1,5 +1,6 @@
 package com.patela.marketplace.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.patela.marketplace.domain.enums.UserRole;
 import com.patela.marketplace.domain.enums.UserState;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User extends BaseEntity<Integer> {
 
     @Email

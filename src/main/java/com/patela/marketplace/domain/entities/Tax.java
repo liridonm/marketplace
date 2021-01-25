@@ -1,5 +1,6 @@
 package com.patela.marketplace.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import javax.validation.constraints.Positive;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tax extends BaseEntity<Integer> {
 
     private String name;
