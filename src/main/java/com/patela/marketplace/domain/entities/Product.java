@@ -2,8 +2,11 @@ package com.patela.marketplace.domain.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
 import com.patela.marketplace.domain.enums.ProductState;
 import com.patela.marketplace.domain.enums.ProductType;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +22,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Product extends BaseEntity<Integer> {
 
     public String name;
@@ -40,7 +43,6 @@ public class Product extends BaseEntity<Integer> {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uom_id")

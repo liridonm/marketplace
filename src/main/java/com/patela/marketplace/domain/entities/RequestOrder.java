@@ -1,6 +1,9 @@
 package com.patela.marketplace.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.patela.marketplace.domain.enums.OrderState;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +18,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestOrder extends BaseEntity<Integer> {
 
     @Column(name = "order_name")

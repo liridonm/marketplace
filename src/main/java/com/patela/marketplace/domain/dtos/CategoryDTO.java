@@ -1,7 +1,9 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.patela.marketplace.domain.entities.CategoryType;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.domain.entities.BaseEntity;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,12 +11,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class CategoryDTO
-{
-    private Integer id;
+@MarketPlaceSerializer(fields = {"name", "type"})
+public class CategoryDTO  extends BaseEntity<Integer> {
     private String name;
     private String description;
-    private CategoryType type;
-    private Boolean isDeleted = false;
+
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
+    private CategoryTypeDTO type;
 }

@@ -3,6 +3,7 @@ package com.patela.marketplace.controller;
 import com.patela.marketplace.annotations.DefaultExceptionMessage;
 import com.patela.marketplace.domain.common.ResponseWrapper;
 import com.patela.marketplace.domain.dtos.ProductDTO;
+import com.patela.marketplace.domain.entities.Product;
 import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;

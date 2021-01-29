@@ -1,20 +1,23 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.domain.entities.BaseEntity;
 import com.patela.marketplace.domain.enums.UserRole;
 import com.patela.marketplace.domain.enums.UserState;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
-public class UserDTO {
-
-    private Integer id;
+@MarketPlaceSerializer(fields = {"email", "username", "firstName", "lastName", "role"})
+public class UserDTO extends BaseEntity<Integer> {
 
     private String email;
 
     private String username;
+
+    private String firstName;
+
+    private String lastName;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -25,5 +28,4 @@ public class UserDTO {
 
     private UserState state;
 
-    private Boolean isDeleted = false;
 }

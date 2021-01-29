@@ -1,6 +1,9 @@
 package com.patela.marketplace.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +20,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Attribute extends BaseEntity<Integer> {
 
     private String name;

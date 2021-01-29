@@ -18,7 +18,7 @@ public class IgnoreNullsUtil {
 
     private String[] getNullPropertyNames(Object source) {
 
-        Set<String> emptyNames = new HashSet<String>();
+        Set<String> emptyNames;
         BeanWrapper src = new BeanWrapperImpl(source);
 
         List<PropertyDescriptor> propertyDescriptors = Arrays.asList(src.getPropertyDescriptors());

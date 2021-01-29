@@ -1,14 +1,13 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.domain.entities.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class SpecificationDTO {
-    private Integer id;
+@MarketPlaceSerializer(fields = {"name"})
+public class SpecificationDTO extends BaseEntity<Integer> {
     private String name;
-    private Boolean isDeleted = false;
 }

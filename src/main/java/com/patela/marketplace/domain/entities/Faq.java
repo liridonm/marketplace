@@ -1,5 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -2,6 +2,7 @@ package com.patela.marketplace.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
 import com.patela.marketplace.domain.enums.UserRole;
 import com.patela.marketplace.domain.enums.UserState;
 import lombok.Getter;
@@ -20,7 +21,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BaseEntity<Integer> {
 
     @Email
@@ -29,6 +30,12 @@ public class User extends BaseEntity<Integer> {
 
     @Column(nullable = false, unique = true)
     private String username;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Size(min = 6, message = "Password should contain at least 6 character!")
     @Column(nullable = false)

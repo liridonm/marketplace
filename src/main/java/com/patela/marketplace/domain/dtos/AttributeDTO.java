@@ -1,15 +1,18 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.domain.entities.BaseEntity;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class AttributeDTO {
-
-    private Integer id;
+@MarketPlaceSerializer(fields = {"name", "code"})
+public class AttributeDTO extends BaseEntity<Integer> {
 
     private String name;
 
@@ -17,5 +20,7 @@ public class AttributeDTO {
 
     private String description;
 
-    private Boolean isDeleted = false;
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
+    private SpecificationDTO specificationDTO;
+
 }

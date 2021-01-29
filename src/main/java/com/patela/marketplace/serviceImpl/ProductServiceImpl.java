@@ -113,6 +113,7 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+
     private void validateProduct(Product product) throws ServiceException {
         if (product.getName() == null || product.getPrice() == null || product.getPrice().equals(BigDecimal.ZERO)
                 || product.getType() == null || product.getState() == null) {

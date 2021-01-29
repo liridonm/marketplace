@@ -1,8 +1,11 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
+import com.patela.marketplace.domain.entities.BaseEntity;
 import com.patela.marketplace.domain.enums.ProductState;
 import com.patela.marketplace.domain.enums.ProductType;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,10 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDTO {
-
-    private Integer id;
+@MarketPlaceSerializer(fields = {"name", "barcode"})
+public class ProductDTO extends BaseEntity<Integer> {
 
     public String name;
 
@@ -30,21 +31,25 @@ public class ProductDTO {
 
     private String description;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private UserDTO user;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private UomDTO uom;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private TaxDTO tax;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private CurrencyDTO currency;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private BrandDTO brand;
 
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
     private CategoryDTO category;
 
     private List<AttributeValueDTO> attributeValues;
-
-    private Boolean isDeleted = false;
 
     private InventoryDTO inventory;
 

@@ -1,6 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.patela.marketplace.annotations.MarketPlaceSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(ignoreUnknown = true)
 //TODO: constraints cannot create two brand with the same name and barcode. Neither barcode is unique
 public class Brand extends BaseEntity<Integer> {
 

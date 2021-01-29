@@ -1,6 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,8 @@ public abstract class BaseEntity<T> {
     private T id;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Boolean isDeleted = false;
 
     /**
      * Model create date.

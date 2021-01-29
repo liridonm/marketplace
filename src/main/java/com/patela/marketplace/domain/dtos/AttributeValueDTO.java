@@ -1,8 +1,9 @@
 package com.patela.marketplace.domain.dtos;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.patela.marketplace.domain.entities.Attribute;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.patela.marketplace.domain.entities.BaseEntity;
 import com.patela.marketplace.domain.enums.AttributeValueType;
+import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,18 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class AttributeValueDTO {
-
-    private Integer id;
+public class AttributeValueDTO extends BaseEntity<Integer> {
 
     private String label;
 
     private String value;
 
-    private Attribute attribute;
+    @JsonSerialize(using = MarketPlaceCustomSerializer.class)
+    private AttributeDTO attribute;
 
     private AttributeValueType attributeValueType;
 
-    private Boolean isDeleted = false;
 }
