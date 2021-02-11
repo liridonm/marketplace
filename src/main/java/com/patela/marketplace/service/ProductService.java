@@ -2,6 +2,7 @@ package com.patela.marketplace.service;
 
 import com.patela.marketplace.domain.dtos.CurrencyDTO;
 import com.patela.marketplace.domain.dtos.ProductDTO;
+import com.patela.marketplace.domain.dtos.SearchDTO;
 import com.patela.marketplace.domain.dtos.UomDTO;
 import com.patela.marketplace.domain.entities.Product;
 import com.patela.marketplace.exception.ServiceException;
@@ -15,5 +16,7 @@ public interface ProductService extends BaseService<ProductDTO, Integer> {
     List<ProductDTO> readByCurrency(CurrencyDTO currencyDTO);
 
     List<ProductDTO> readByUom(UomDTO uomDTO);
+
+    List<ProductDTO> searchProduct(SearchDTO searchDTO);
 
 }

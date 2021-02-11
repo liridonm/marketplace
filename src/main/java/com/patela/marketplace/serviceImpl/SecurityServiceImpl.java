@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
@@ -40,8 +42,7 @@ public class SecurityServiceImpl implements SecurityService {
      * @return user by username or email {@link User}
      */
     public User loadUser(String value) {
-        boolean isEmail = value.contains("@");
-        return isEmail ? userService.readByEmail(value) : userService.readByUsername(value);
+        return isEmailValid(value) ? userService.readByEmail(value) : userService.readByUsername(value);
     }
 
     /**
@@ -54,6 +55,16 @@ public class SecurityServiceImpl implements SecurityService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return grantedAuthorities;
+    }
+
+    private boolean isEmailValid(String email) {
+        final String regex = "^(.+)@(.+)$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(email);
+
+        return matcher.matches();
     }
 
 }

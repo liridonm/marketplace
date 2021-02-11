@@ -1,7 +1,7 @@
 package com.patela.marketplace.domain.entities;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.patela.marketplace.serializer.MarketPlaceCustomSerializer;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.patela.marketplace.domain.enums.OrderState;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
 public class RequestOrderLine extends BaseEntity<Integer> {
-    private Integer quantity;
+    private BigDecimal quantity;
 
     private BigDecimal price;
 
@@ -28,7 +28,20 @@ public class RequestOrderLine extends BaseEntity<Integer> {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("order-line")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "request_order_id")
     private RequestOrder requestOrder;
+
+    @Enumerated(EnumType.STRING)
+    private OrderState state;
+
+    private BigDecimal total;
+
+
+    @PrePersist
+    @PreUpdate
+    public void compute() {
+        this.total = price.multiply(quantity);
+    }
 }

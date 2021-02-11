@@ -1,11 +1,14 @@
 package com.patela.marketplace.service;
 
-import com.patela.marketplace.domain.dtos.InventoryDTO;
 import com.patela.marketplace.domain.entities.Inventory;
+import com.patela.marketplace.domain.entities.Product;
 import com.patela.marketplace.exception.ServiceException;
+
+import java.math.BigDecimal;
 
 public interface InventoryService {
 
-    InventoryDTO addInventoryOnStock(InventoryDTO inventoryDTO) throws ServiceException;
+    Inventory updateInventoryStock(Integer productId, BigDecimal quantity) throws ServiceException;
 
+    Inventory readByProduct(Product product) throws ServiceException;
 }

@@ -3,12 +3,14 @@ package com.patela.marketplace.controller;
 import com.patela.marketplace.annotations.DefaultExceptionMessage;
 import com.patela.marketplace.domain.common.ResponseWrapper;
 import com.patela.marketplace.domain.dtos.ProductDTO;
+import com.patela.marketplace.domain.dtos.SearchDTO;
 import com.patela.marketplace.domain.entities.Product;
 import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,11 +25,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping(value = {"/api/v1/product", "/api/p1/product"})
+    @PostMapping(value = {"/api/v1/product", "/api/p1/product"})
     @DefaultExceptionMessage(defaultMessage = "Failed to retrieve products!")
     @Operation(summary = "Read all products")
-    public ResponseEntity<ResponseWrapper> readAll() {
-        List<ProductDTO> products = productService.readAll();
+    public ResponseEntity<ResponseWrapper> readAll(@RequestBody SearchDTO searchDTO) {
+        List<ProductDTO> products = productService.searchProduct(searchDTO);
         return ResponseEntity.ok(new ResponseWrapper("Successfully retrieved list of products!", products));
 
     }

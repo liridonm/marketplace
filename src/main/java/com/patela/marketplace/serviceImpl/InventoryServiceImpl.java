@@ -1,13 +1,14 @@
 package com.patela.marketplace.serviceImpl;
 
-import com.patela.marketplace.domain.dtos.InventoryDTO;
 import com.patela.marketplace.domain.entities.Inventory;
 import com.patela.marketplace.domain.entities.Product;
+import com.patela.marketplace.exception.ServiceException;
 import com.patela.marketplace.repository.InventoryRepository;
 import com.patela.marketplace.service.InventoryService;
 import com.patela.marketplace.util.MapperUtil;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -24,18 +25,36 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public InventoryDTO addInventoryOnStock(InventoryDTO inventoryDTO) throws ServiceException{
-        Product convertProduct = mapperUtil.convert(inventoryDTO.getProduct(), new Product());
+    @Transactional
+    public Inventory updateInventoryStock(Integer productId, BigDecimal quantity) throws ServiceException {
 
-        Inventory inventory = inventoryRepository.findByProductId(convertProduct.getId())
+        Inventory currentInventory = inventoryRepository.findByProductId(productId)
+                .orElseThrow(() -> new ServiceException(String.format("There is no inventory for product with id %s.", productId)));
+
+
+        switch (currentInventory.getStatus()) {
+            case OUT_OF_STOCK:
+                throw new ServiceException(String.format("Product  with id %s is out of stock.", productId));
+            case ON_DEMAND:
+                break;
+            case IN_STOCK:
+                BigDecimal qty = currentInventory.getQuantity().add(quantity);
+
+                if (qty.compareTo(BigDecimal.ZERO) < 0) {
+                    throw new ServiceException(String.format("There aren't enough quantities for product with id %s", productId));
+                }
+                currentInventory.setQuantity(qty);
+                inventoryRepository.save(currentInventory);
+        }
+
+        return currentInventory;
+
+    }
+
+    @Override
+    public Inventory readByProduct(Product product) throws ServiceException {
+        return inventoryRepository.findByProductId(product.getId())
                 .orElseThrow(() -> new ServiceException("Inventory does not exists!"));
-
-        BigDecimal qty = inventory.getQuantity().add(inventoryDTO.getQuantity());
-
-        inventory.setQuantity(qty);
-        Inventory updatedInventory = inventoryRepository.save(inventory);
-
-        return mapperUtil.convert(updatedInventory, new InventoryDTO());
     }
 
 }

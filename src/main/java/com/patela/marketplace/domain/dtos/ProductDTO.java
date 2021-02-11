@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@MarketPlaceSerializer(fields = {"name", "barcode"})
+@MarketPlaceSerializer(fields = {"name", "barcode", "price", "inventory"})
 public class ProductDTO extends BaseEntity<Integer> {
 
     public String name;
