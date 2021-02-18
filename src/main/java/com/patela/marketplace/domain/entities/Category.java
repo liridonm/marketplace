@@ -20,7 +20,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 //TODO: should we leave to create two category with the same that are linked with the same categoryType?
 public class Category extends BaseEntity<Integer> {
-
+    @Column(unique = true)
     private String name;
 
     @Column(columnDefinition = "text")

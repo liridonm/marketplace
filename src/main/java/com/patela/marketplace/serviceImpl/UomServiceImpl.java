@@ -89,7 +89,7 @@ public class UomServiceImpl implements UomService {
             throw new ServiceException("This UOM already exist");
         }
 
-        if (StringUtils.isEmpty(uom.getName())) {
+        if (uom.getName().isEmpty()) {
             throw new ServiceException("Name can't be null");
         }
     }

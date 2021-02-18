@@ -18,9 +18,9 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
 @JsonIgnoreProperties(ignoreUnknown = true)
-//TODO: should name be unique?
+//TODO: should name be unique? - DONE
 public class CategoryType extends BaseEntity<Integer> {
-
+    @Column(unique = true)
     private String name;
 
     @Column(columnDefinition = "text")

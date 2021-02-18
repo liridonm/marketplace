@@ -38,6 +38,13 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    public BrandDTO readByName(String name) throws ServiceException {
+        Brand brand = brandRepository.findByName(name)
+                .orElseThrow(() -> new ServiceException("Brand does not exists given the name: " + name));
+        return mapperUtil.convertToDTO(brand, new BrandDTO());
+    }
+
+    @Override
     public BrandDTO create(BrandDTO brand) throws ServiceException {
         Brand convertBrand = mapperUtil.convertToDTO(brand, new Brand());
         validateBrand(convertBrand);
@@ -71,7 +78,7 @@ public class BrandServiceImpl implements BrandService {
             throw new ServiceException("Brand already exists!");
         }
 
-        if(StringUtils.isEmpty(brand.getName())){
+        if(brand.getName().isEmpty()){
             throw new ServiceException("Name cannot be null");
         }
     }

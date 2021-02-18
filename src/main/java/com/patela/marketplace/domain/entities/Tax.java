@@ -7,9 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "tax")
@@ -19,10 +21,10 @@ import javax.validation.constraints.Positive;
 @Where(clause = "is_deleted=false")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tax extends BaseEntity<Integer> {
-
+    @Column(unique = true)
     private String name;
 
-    //TODO: change to bigDecimal
+    //TODO: change to bigDecimal - DONE
     @Positive
-    private String value;
+    private BigDecimal value;
 }

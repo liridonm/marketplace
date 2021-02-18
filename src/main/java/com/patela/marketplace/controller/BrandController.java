@@ -35,6 +35,14 @@ public class BrandController {
         return  ResponseEntity.ok(new ResponseWrapper("Successfully retrieved the Brand with ID: " + id, brand));
     }
 
+    @GetMapping(value = {"/api/v1/brand/name/{name}"})
+    @DefaultExceptionMessage(defaultMessage = "Failed to read by name")
+    @Operation(summary = "Reads a brand matching a name")
+    public ResponseEntity<ResponseWrapper> readByName(@PathVariable("name") String name) throws  ServiceException{
+        BrandDTO brand = brandService.readByName(name);
+        return ResponseEntity.ok(new ResponseWrapper("Successfully retrieved the Brand with Name: " + name, brand));
+    }
+
     @PostMapping(value = {"/api/v1/brand"})
     @DefaultExceptionMessage(defaultMessage = "Failed to create brand")
     @Operation(summary = "Create a Brand")

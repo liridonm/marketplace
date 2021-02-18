@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,7 +21,9 @@ import javax.persistence.Table;
 //TODO: constraints cannot create two brand with the same name and barcode. Neither barcode is unique
 public class Brand extends BaseEntity<Integer> {
 
+    @Column(unique = true)
     private String name;
 
+    @Column(unique = true)
     private String barcode;
 }
